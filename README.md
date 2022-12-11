@@ -4,7 +4,7 @@ An accelerated version of the SDF-based NeuS method for surface modeling, which 
 
 <p float="left">
   <img src="./static/106_mesh.png" width="400" />
-  <img src="./static/106_mesh.png" width="400" /> 
+  <img src="./static/106_pic.png" width="400" /> 
 </p>
 
 ## Features
