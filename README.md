@@ -3,8 +3,8 @@
 An accelerated version of the SDF-based NeuS method for surface modeling, which can accurately render novel views and reconstruct the surface of 3D solid objects based on a sparse set of views.
 
 <p float="left">
-  <img src="./static/106_mesh.gif" width="400" />
-  <img src="./static/106_mesh.gif" width="400" /> 
+  <img src="./static/106_mesh.png" width="400" />
+  <img src="./static/106_mesh.png" width="400" /> 
 </p>
 
 ## Features
