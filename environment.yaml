@@ -1,0 +1,9 @@
+# environment.yaml
+
+name: NeuSacc
+dependencies:
+  - python==3.9
+  - anaconda
+  - pip
+  - pip:
+    - -r file:requirements.txt

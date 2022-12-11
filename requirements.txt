@@ -1,0 +1,11 @@
+nerfacc==0.3.1
+ninja
+git+https://github.com/NVlabs/tiny-cuda-nn/@8e6e242f36dd197134c9b9275a8e5108a8e3af78#subdirectory=bindings/torch
+tinyobjloader==2.0.0rc7
+torch>=1.12.1
+tqdm
+trimesh
+wandb
+pymcubes
+opencv-python
+pyhocon
