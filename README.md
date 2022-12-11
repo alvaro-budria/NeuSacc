@@ -49,7 +49,7 @@ git clone git@github.com:alvaro-budria/NeuSacc.git
 
 then either
 ```
-conda env create -f environment.yml
+conda env create -f environment.yaml
 ```
 or
 ```
