@@ -29,7 +29,7 @@ Other interesting repositories and implementations are:
 
 ## Running
 
-The config in `confs/wmask_DTUscan.conf` is ready for scene 106 of the DTU scan dataset (which you can download [here](https://drive.google.com/drive/folders/1Nlzejs4mfPuJYORLbDEUDWlc9IZIbU0C)).
+The config in `confs/wmask_DTUscan.conf` is ready for scene 106 of the DTU scan dataset (which you can download [here](https://drive.google.com/drive/folders/1Nlzejs4mfPuJYORLbDEUDWlc9IZIbU0C)). You can reconstruct this scene in about __30 minutes__, while the original NeuS implementation takes around __2 hours__.
 
 To fit a NeuS model on this scene, run
 
@@ -37,12 +37,12 @@ To fit a NeuS model on this scene, run
 python exp_runner.py --mode train --conf ./confs/wmask_DTUscan.conf
 ```
 
-You may need to slightly adjust the learning rate, the weight decay, as well as the size of the hash grid and MLPs, based on the amount of detail in each particular scene.
+You may need to slightly adjust the learning rate, the weight decay, as well as the size of the hash grid and MLPs, based on the amount of detail in each particular scene. In general, simpler, less detailed scenes will take an even shorter time, while objects containing more high frequency textures may take a bit longer to train.
 
 
 ## Environments and Requirements
 
-Clone repository
+Clone this repository
 ```
 git clone git@github.com:alvaro-budria/NeuSacc.git
 ```
@@ -56,10 +56,17 @@ or
 pip install -r requirements
 ```
 
-A CUDA device having a compute capability of 75 (e.g. RXT 2080Ti) or higher is needed for running the `tinycudann` MLPs and hash grid encoding.
+A GPU device having a compute capability of 75 (e.g. RTX 2080Ti) or higher is needed for running the `tinycudann` MLPs and hash grid encoding. To maximally exploit the efficiency of the hash grid encoding, an A10 or an RTX3090 are recommended, as they have bigger cache sizes.
 
 
 ## Modelling a scene with custom COLMAP data
 
 Please refer to [this tutorial](https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data) in the original NeuS repository for using custom data with COLMAP-generated camera poses.
 
+
+## TODO
+
+- [ ] Allow for multi-GPU training.
+- [ ] Include an additional component for modelling the background, as in Mip-NeRF360 or NeRF++.
+- [ ] Thoroughly benchmark this implementation of NeuS in terms of PSNR, Chamfer distance, and training time, comparing it with the original one.
+- [ ] Explore the effect that the number of frequency bands and size of the hash grid and MLPs have on the outcome reconstruction.
