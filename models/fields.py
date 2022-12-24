@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import numpy as np
-from models.grids import *
 from models.model_components import get_mlp, get_encoding
 
 
