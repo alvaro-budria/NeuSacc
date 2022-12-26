@@ -16,6 +16,7 @@ class NeuSModel(nn.Module,):
         self.occ_thre = config['train'].get('occ_thre', 0.01)
         self.randomized = config['train.randomized']
         self.num_samples_per_ray = config['train.num_samples_per_ray']
+        self.resolution_occ_grid = config.get('train.resolution_occ_grid', 128)
         self.cos_anneal_ratio = 0.0
 
         self.geometry = SDFNetwork(
