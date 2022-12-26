@@ -33,7 +33,7 @@ class NeuSModel(nn.Module,):
         if self.grid_prune:
             self.occupancy_grid = OccupancyGrid(
                 roi_aabb=self.scene_aabb,
-                resolution=198,
+                resolution=self.resolution_occ_grid,
                 contraction_type=ContractionType.AABB
             ).to(self.device)
         self.register_buffer('background_color', torch.as_tensor([0, 0, 0], dtype=torch.float32), persistent=False)
