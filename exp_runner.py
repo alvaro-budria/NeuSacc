@@ -130,9 +130,8 @@ class Runner:
 
         # Logging
         os.environ["WANDB_DIR"] = "../"
-        config_dict = {"yaml": "confs/wandb_config.yaml"}
         self.run = wandb.init(
-            project="NeuS-Enhanced", config=config_dict, save_code=True, dir=self.base_exp_dir,
+            project="NeuS-Enhanced", save_code=True, dir=self.base_exp_dir,
         )
         wandb.watch(
             (self.neus_model),
