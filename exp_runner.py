@@ -373,8 +373,9 @@ class Runner:
         return img_fine
 
     def validate_mesh(self, world_space=False, resolution=512, threshold=0.0):
-        bound_min = torch.tensor(self.dataset.object_bbox_min, dtype=torch.float32)
-        bound_max = torch.tensor(self.dataset.object_bbox_max, dtype=torch.float32)
+        # During training the inputs were normalized to the [0,1] range, so the model expects inputs in this range.
+        bound_min = torch.tensor([0, 0, 0], dtype=torch.float32)
+        bound_max = torch.tensor([1, 1, 1], dtype=torch.float32)
 
         vertices, triangles =\
             self.renderer.extract_geometry(bound_min, bound_max, resolution=resolution, threshold=threshold)
