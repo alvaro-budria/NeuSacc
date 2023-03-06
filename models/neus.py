@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from .utils import scale_anything
 from .fields import RenderingNetwork, SDFNetwork, SingleVarianceNetwork
 from nerfacc import ContractionType, OccupancyGrid, ray_marching, rendering
 
@@ -53,6 +54,7 @@ class NeuSModel(nn.Module,):
         self.cos_anneal_ratio = 1.0 if cos_anneal_end == 0 else min(1.0, global_step / cos_anneal_end)
 
         def occ_eval_fn(x):
+            x = scale_anything(x, self.scene_aabb, (0, 1))
             sdf = self.geometry.sdf(x, training=False)
             inv_s = self.variance(torch.zeros([1, 3]))[:, :1].clip(1e-6, 1e6)
             inv_s = inv_s.expand(sdf.shape[0], 1)
@@ -103,6 +105,7 @@ class NeuSModel(nn.Module,):
             t_dirs = rays_d[ray_indices]
             midpoints = (t_starts + t_ends) / 2.
             positions = t_origins + t_dirs * midpoints
+            positions = scale_anything(positions, self.scene_aabb, (0, 1))
             sdf = self.geometry.sdf(positions,)
             sdf_grad = self.geometry.gradient(positions,).squeeze()
             normal = F.normalize(sdf_grad, p=2, dim=-1)
@@ -116,6 +119,7 @@ class NeuSModel(nn.Module,):
             t_dirs = rays_d[ray_indices]
             midpoints = (t_starts + t_ends) / 2.
             positions = t_origins + t_dirs * midpoints
+            positions = scale_anything(positions, self.scene_aabb, (0, 1))
             geometry = self.geometry(positions,)
             sdf, feature = geometry[:, :1], geometry[:, 1:]
             sdf_grad = self.geometry.gradient(positions,)
